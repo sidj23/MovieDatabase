@@ -22,32 +22,213 @@
                <ImageView
                    android:layout_width="match_parent"
                    android:layout_height="200dp"
-                   android:id="@+id/img_back_post"
-                   android:scaleType="centerCrop"/>
+                   android:id="@+id/img_md_back_post"
+                   android:scaleType="centerCrop"
+                   android:background="@drawable/background_categories"/>
 
                <ImageView
                    android:layout_width="130dp"
                    android:layout_height="130dp"
-                   android:id="@+id/img_profile_poster"
+                   android:id="@+id/img_md_profile_poster"
                    android:layout_alignParentStart="true"
                    android:layout_alignParentLeft="true"
                    android:layout_marginLeft="30dp"
-                   android:layout_marginTop="130dp"/>
+                   android:layout_marginTop="130dp"
+                   android:background="@drawable/background_categories"
+                   android:scaleType="fitXY"/>
 
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:layout_below="@id/img_back_post"
-                   android:layout_toRightOf="@id/img_profile_poster"
+                   android:layout_below="@id/img_md_back_post"
+                   android:layout_toRightOf="@id/img_md_profile_poster"
                    android:text="title"
                    android:gravity="center"
-                   android:textSize="25dp"
+                   android:textSize="25sp"
                    android:padding="5dp"
                    android:textColor="@color/colorBlack"
-                   android:id="@+id/tv_title"/>
+                   android:id="@+id/tv_md_title"/>
 
            </RelativeLayout>
 
+           <View
+               android:layout_width="match_parent"
+               android:layout_height="2dp"
+               android:background="@color/colorBlack"
+               android:layout_marginTop="5dp"
+               android:visibility="gone"/>
+
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="10dp"
+               android:orientation="horizontal"
+               android:weightSum="4"
+               android:gravity="center">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:orientation="vertical"
+                   android:layout_toRightOf="@+id/linear_rating"
+                   android:layout_weight="1">
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Genre"
+                       android:textSize="20sp"
+                       android:gravity="center"
+                       />
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:text="drama."
+                       android:gravity="center"
+                       android:maxLines="3"
+                       android:ellipsize="end"
+                       android:id="@+id/tv_md_genre"
+                       android:textSize="15sp"
+                       android:paddingLeft="5dp"
+                       android:paddingRight="5dp"
+                       android:textColor="@color/colorBlack"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                   android:id="@+id/linear_rating"
+                   android:layout_weight="1">
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Rating"
+                       android:textSize="20sp"
+                       android:gravity="center"/>
+                   <ImageView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:src="@drawable/ic_star"/>
+
+                   <TextView
+                       android:id="@+id/tv_md_rating"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="center"
+                       android:text="6.5/10"
+                       android:textColor="@color/colorBlack"
+                       android:textSize="15sp" />
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="center"
+                       android:textSize="12sp"
+                       android:id="@+id/tv_md_votes"/>
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:orientation="vertical"
+                   android:layout_weight="1">
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Release Date"
+                       android:textSize="20sp"
+                       android:gravity="center"/>
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:text="23/01/1996"
+                       android:id="@+id/tv_md_release_date"
+                       android:gravity="center"
+                       android:textSize="15sp"
+                       android:textColor="@color/colorBlack"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Duration"
+                       android:textSize="20sp"
+                       android:gravity="center"/>
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:text="110min"
+                       android:gravity="center"
+                       android:textColor="@color/colorBlack"
+                       android:id="@+id/tv_md_duration"/>
+
+               </LinearLayout>
+
+           </LinearLayout>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Summary"
+               android:layout_marginTop="20dp"
+               android:paddingLeft="20dp"
+               android:textSize="25sp"/>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingLeft="25dp"
+               android:paddingRight="15dp"
+               android:id="@+id/tv_md_plot"
+               android:textSize="17sp"
+               android:paddingTop="10dp"
+               android:textColor="@color/colorBlack"
+               android:text="sbfhbjdhsbjfbdsjhbfhsdbsdbsdjhbsdhfbsdnfdsnsdkjnjkfnsdfnsdfnsdkfnsdkfnsdskfnsdnfsdkjfnsdkfnsdkjfnsdkjfnsdkjfnsdkjfnsdkjfnsdkjfnsdkjfndkfnsdknfsdfnskdjf"/>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content" 
+               android:layout_marginTop="20dp"
+               android:paddingLeft="20dp"
+               android:textSize="25sp"
+               android:text="Top Cast"/>
+           
+           <android.support.v7.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="280dp"
+               android:orientation="horizontal"
+               android:padding="10dp"
+               android:id="@+id/recycler_cast"/>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="20dp"
+               android:paddingLeft="20dp"
+               android:textSize="25sp"
+               android:text="Crew"/>
+
+           <android.support.v7.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="250dp"
+               android:orientation="horizontal"
+               android:padding="10dp"
+               android:id="@+id/recycler_crew"/>
 
        </LinearLayout>
 

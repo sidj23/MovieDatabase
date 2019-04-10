@@ -1,5 +1,6 @@
 package com.sid.moviedatabase.Retrofit;
 
+import com.sid.moviedatabase.RetrofitModel.CastModels;
 import com.sid.moviedatabase.RetrofitModel.ComingSoonModel;
 import com.sid.moviedatabase.RetrofitModel.InTheatreModel;
 import com.sid.moviedatabase.RetrofitModel.MostPopularModel;
@@ -28,4 +29,7 @@ public interface RetrofitInterface {
 
     @GET("{movie_id}")
     Call<MovieDetailsModel> getDetails(@Path("movie_id")String id, @Query("api_key")String key);
+
+    @GET("{movie_id}/credits")
+    Call<CastModels> getCast(@Path("movie_id")String id, @Query("api_key")String key);
 }

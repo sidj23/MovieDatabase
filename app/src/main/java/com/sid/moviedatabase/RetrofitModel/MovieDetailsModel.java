@@ -3,6 +3,9 @@ package com.sid.moviedatabase.RetrofitModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MovieDetailsModel {
 
     @SerializedName("id")
@@ -20,6 +23,78 @@ public class MovieDetailsModel {
     @SerializedName("title")
     @Expose
     private String title;
+
+    @SerializedName("vote_average")
+    @Expose
+    private String rating;
+
+    @SerializedName("vote_count")
+    @Expose
+    private String vote;
+
+    @SerializedName("release_date")
+    @Expose
+    private String date;
+
+    @SerializedName("overview")
+    @Expose
+    private String plot;
+
+    @SerializedName("genres")
+    @Expose
+    private List<Genre> genre = new ArrayList<>();
+
+    @SerializedName("runtime")
+    @Expose
+    private int runtime;
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
+    }
+
+    public String getPlot() {
+        return plot;
+    }
+
+    public void setPlot(String plot) {
+        this.plot = plot;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getVote() {
+        return vote;
+    }
+
+    public void setVote(String vote) {
+        this.vote = vote;
+    }
+
+    public List<Genre> getGenre() {
+        return genre;
+    }
+
+    public void setGenre(List<Genre> genre) {
+        this.genre = genre;
+    }
 
     public String getId() {
         return id;
@@ -51,5 +126,20 @@ public class MovieDetailsModel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public class Genre {
+
+        @SerializedName("name")
+        @Expose
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

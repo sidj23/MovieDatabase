@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:text="Most Popular Movies"
                     android:textSize="25sp" />
 
@@ -41,7 +41,7 @@
                     android:id="@+id/tv_sa_most_pop"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toRightOf="@+id/tv_most_popular"
                     android:gravity="center"
                     android:text="SEE ALL"
@@ -53,7 +53,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_most_popular"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:padding="10dp"
                 app:reverseLayout="true"
                 app:stackFromEnd="true" />
@@ -75,7 +75,7 @@
                     android:id="@+id/tv_in_theaters"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:text="In Theaters"
                     android:textSize="25sp" />
 
@@ -84,7 +84,7 @@
                     android:id="@+id/tv_sa_in_theatre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toRightOf="@+id/tv_in_theaters"
                     android:gravity="center"
                     android:text="SEE ALL"
@@ -119,7 +119,7 @@
                     android:id="@+id/tv_coming_soon"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:text="Comming Soon"
                     android:textSize="25sp" />
 
@@ -128,7 +128,7 @@
                     android:id="@+id/tv_sa_coming_soon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toRightOf="@+id/tv_coming_soon"
                     android:gravity="center"
                     android:text="SEE ALL"
@@ -163,7 +163,7 @@
                     android:id="@+id/tv_top_rated"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:text="Top Rated"
                     android:textSize="25sp" />
 
@@ -172,7 +172,7 @@
                     android:id="@+id/tv_sa_top_rated"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toRightOf="@+id/tv_top_rated"
                     android:gravity="center"
                     android:text="SEE ALL"
