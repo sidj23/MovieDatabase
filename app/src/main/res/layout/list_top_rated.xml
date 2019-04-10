@@ -7,12 +7,12 @@
     android:elevation="10dp"
     android:background="@drawable/background_categories"
     android:layout_margin="10dp"
-    android:id="@+id/linear_coming_soon">
+    android:id="@+id/linear_top_rated">
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:id="@+id/img_cs_poster"
+        android:id="@+id/img_tr_poster"
         android:layout_marginTop="3dp"/>
 
     <TextView
@@ -24,17 +24,29 @@
         android:ellipsize="end"
         android:textSize="20sp"
         android:textColor="#000000"
-        android:id="@+id/tv_cs_movie_name"/>
+        android:id="@+id/tv_tr_movie_name"/>
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="1"
-        android:textSize="20sp"
-        android:id="@+id/tv_cs_rel_date" />
+        android:gravity="center">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star"
+            android:id="@+id/img_ic_star"
+            android:padding="5dp"/>
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/img_ic_star"
+            android:text="1.6/10"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:id="@+id/tv_tr_rating"/>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:elevation="10dp"
     android:background="@drawable/background_categories"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:id="@+id/linear_in_theatre">
 
     <ImageView
         android:layout_width="150dp"

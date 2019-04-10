@@ -1,16 +1,19 @@
 package com.sid.moviedatabase.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sid.moviedatabase.Model.RecyclerPopularModel;
 import com.sid.moviedatabase.R;
+import com.sid.moviedatabase.UI.MovieDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -31,6 +34,7 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
 
         TextView tvNames,tvRank;
         ImageView imgPoster;
+        LinearLayout linearLayout;
 
 
         public MostPopularViewHolder(@NonNull View view) {
@@ -38,6 +42,7 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
             tvNames= view.findViewById(R.id.tv_movie_name);
             tvRank=view.findViewById(R.id.tv_rank);
             imgPoster=view.findViewById(R.id.img_poster);
+            linearLayout=view.findViewById(R.id.linear_most_popular);
         }
     }
 
@@ -49,7 +54,7 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MostPopularViewHolder holder, int i) {
-        RecyclerPopularModel movies = moviesList.get(i);
+        final RecyclerPopularModel movies = moviesList.get(i);
 
         holder.tvNames.setText(movies.getTitle());
 
@@ -58,6 +63,17 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
         Picasso.get()
                 .load(IMG_URL+movies.getImgUrl())
                 .into(holder.imgPoster);
+
+
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent putIntent = new Intent(context, MovieDetailsActivity.class);
+                putIntent.putExtra("movieId",movies.getMovieId());
+                context.startActivity(putIntent);
+            }
+        });
 
     }
 
