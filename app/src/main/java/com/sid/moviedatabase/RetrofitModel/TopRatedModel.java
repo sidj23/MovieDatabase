@@ -38,6 +38,30 @@ public class TopRatedModel {
         @Expose
         private String imgUrl;
 
+        @SerializedName("release_date")
+        @Expose
+        private String date;
+
+        @SerializedName("vote_count")
+        @Expose
+        private String count;
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public String getCount() {
+            return count;
+        }
+
+        public void setCount(String count) {
+            this.count = count;
+        }
+
         public String getMovieId() {
             return movieId;
         }

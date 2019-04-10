@@ -1,5 +1,6 @@
 package com.sid.moviedatabase.UI;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -94,28 +95,36 @@ public class MainActivity extends AppCompatActivity {
         saPopular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent putIntent = new Intent(MainActivity.this,MovieListActivity.class);
+                putIntent.putExtra("type","mostPopular");
+                startActivity(putIntent);
             }
         });
 
         saInTheater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent putIntent = new Intent(MainActivity.this,MovieListActivity.class);
+                putIntent.putExtra("type","inTheatre");
+                startActivity(putIntent);
             }
         });
 
         saComSoon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent putIntent = new Intent(MainActivity.this,MovieListActivity.class);
+                putIntent.putExtra("type","comingSoon");
+                startActivity(putIntent);
             }
         });
 
         saTopRated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent putIntent = new Intent(MainActivity.this,MovieListActivity.class);
+                putIntent.putExtra("type","topRated");
+                startActivity(putIntent);
             }
         });
 

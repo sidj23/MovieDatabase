@@ -38,6 +38,30 @@ public class ComingSoonModel {
         @Expose
         private String releaseDate;
 
+        @SerializedName("vote_average")
+        @Expose
+        private String rating;
+
+        @SerializedName("vote_count")
+        @Expose
+        private String count;
+
+        public String getRating() {
+            return rating;
+        }
+
+        public void setRating(String rating) {
+            this.rating = rating;
+        }
+
+        public String getCount() {
+            return count;
+        }
+
+        public void setCount(String count) {
+            this.count = count;
+        }
+
         public String getMovieId() {
             return movieId;
         }

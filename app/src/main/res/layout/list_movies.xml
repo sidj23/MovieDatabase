@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@drawable/background_categories"
+    android:layout_margin="5dp"
+    android:elevation="10dp"
+    android:id="@+id/relay_movie_list">
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="150dp"
+        android:id="@+id/img_ml_prof"
+        android:layout_margin="3dp"
+        android:scaleType="fitXY"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/img_ml_prof">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10dp"
+            android:text="kjsdkjfjsf"
+            android:id="@+id/tv_ml_title"
+            android:textColor="@color/colorBlack"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_star"
+                android:paddingLeft="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.6/10"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:id="@+id/tv_ml_rating"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(217)"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:id="@+id/tv_ml_votes"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:text="Release Date : "
+            android:textSize="20sp"
+            android:id="@+id/tv_ml_date"/>
+    </LinearLayout>
+</RelativeLayout>
