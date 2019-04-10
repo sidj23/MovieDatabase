@@ -6,33 +6,38 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sid.moviedatabase.Model.RecyclerPopular;
+import com.sid.moviedatabase.Model.RecyclerPopularModel;
 import com.sid.moviedatabase.R;
-import com.sid.moviedatabase.RetrofitModel.MostPopularModel;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.sid.moviedatabase.Constants.IMG_URL;
 
 public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.MostPopularViewHolder> {
 
-    List<RecyclerPopular> moviesList ;
+    List<RecyclerPopularModel> moviesList ;
     Context context;
 
-    public MostPopularAdapter(Context context,List<RecyclerPopular> moviesList) {
+    public MostPopularAdapter(Context context,List<RecyclerPopularModel> moviesList) {
         this.moviesList = moviesList;
         this.context = context;
     }
 
     public class MostPopularViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvNames;
+        TextView tvNames,tvRank;
+        ImageView imgPoster;
 
 
         public MostPopularViewHolder(@NonNull View view) {
             super(view);
             tvNames= view.findViewById(R.id.tv_movie_name);
+            tvRank=view.findViewById(R.id.tv_rank);
+            imgPoster=view.findViewById(R.id.img_poster);
         }
     }
 
@@ -44,9 +49,15 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MostPopularViewHolder holder, int i) {
-        RecyclerPopular movies = moviesList.get(i);
+        RecyclerPopularModel movies = moviesList.get(i);
 
         holder.tvNames.setText(movies.getTitle());
+
+        holder.tvRank.setText(movies.getRank());
+
+        Picasso.get()
+                .load(IMG_URL+movies.getImgUrl())
+                .into(holder.imgPoster);
 
     }
 

@@ -1,50 +1,38 @@
 package com.sid.moviedatabase.RetrofitModel;
 
-import android.view.WindowManager;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MostPopularModel {
-
-    @SerializedName("page")
-    @Expose
-    private int page;
-
+public class InTheatreModel {
 
     @SerializedName("results")
     @Expose
-    private List<movieResults> movieResults = new ArrayList<>();
+    private List<Results> results = new ArrayList<>();
 
-    public int getPage() {
-        return page;
+    public List<Results> getResults() {
+        return results;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public void setResults(List<Results> results) {
+        this.results = results;
     }
 
-    public List<MostPopularModel.movieResults> getMovieResults() {
-        return movieResults;
-    }
-
-    public void setMovieResults(List<MostPopularModel.movieResults> movieResults) {
-        this.movieResults = movieResults;
-    }
-
-    public class movieResults {
-
+    public class Results {
 
         @SerializedName("id")
         @Expose
-        private  String movieId;
+        private String movieId;
 
         @SerializedName("title")
         @Expose
-        private String title;
+        private String movieName;
+
+        @SerializedName("vote_average")
+        @Expose
+        private String rating;
 
         @SerializedName("poster_path")
         @Expose
@@ -58,12 +46,20 @@ public class MostPopularModel {
             this.movieId = movieId;
         }
 
-        public String getTitle() {
-            return title;
+        public String getMovieName() {
+            return movieName;
         }
 
-        public void setTitle(String title) {
-            this.title = title;
+        public void setMovieName(String movieName) {
+            this.movieName = movieName;
+        }
+
+        public String getRating() {
+            return rating;
+        }
+
+        public void setRating(String rating) {
+            this.rating = rating;
         }
 
         public String getImgUrl() {
