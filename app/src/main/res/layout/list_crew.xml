@@ -21,13 +21,21 @@
         android:gravity="center"
         android:id="@+id/tv_md_crew"
         android:textColor="@color/colorBlack"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:id="@+id/tv_md_job"
-        android:text="bjhdjsbjdbf"/>
+        android:text="bjhdjsbjdbf"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"/>
 
 </LinearLayout>

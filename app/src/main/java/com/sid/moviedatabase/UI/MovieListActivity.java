@@ -126,6 +126,9 @@ public class MovieListActivity extends AppCompatActivity {
                 currentPage = 1;
 
                 switch (item.getItemId()) {
+                    case R.id.normal:
+                        setupOnScrollListener(get.getStringExtra("type"),"normal");
+                        return true;
                     case R.id.name:
                         setupOnScrollListener(get.getStringExtra("type"),"menu");
                         sortingType="name";

@@ -52,6 +52,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
         setTitle("Movie Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
         imgProfilePost=findViewById(R.id.img_md_profile_poster);
         imgBackPost=findViewById(R.id.img_md_back_post);
         tvTitle=findViewById(R.id.tv_md_title);
@@ -69,6 +71,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayout = new LinearLayoutManager(MovieDetailsActivity.this,LinearLayout.HORIZONTAL,false);
         recyclerCrew.setLayoutManager(linearLayout);
+
+        recyclerCast.setFocusable(false);
+        recyclerCrew.setFocusable(false);
 
         Intent get = getIntent();
         getDetails(get.getStringExtra("movieId"));
