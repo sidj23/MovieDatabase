@@ -2,18 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/popular"
+        android:id="@+id/name"
         android:enabled="true"
         android:title="Name"
         app:showAsAction="never" />
     <item
         android:id="@+id/top_rated"
         android:enabled="true"
-        android:title="Rating Descending"
+        android:title="Top Rating"
         app:showAsAction="never" />
     <item
-        android:id="@+id/upcoming"
+        android:id="@+id/date_desc"
         android:enabled="true"
-        android:title="Upcoming"
+        android:title="Release Date Descending"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/date_asc"
+        android:enabled="true"
+        android:title="Release Date Ascending"
+        app:showAsAction="never" />
+
 </menu>

@@ -37,15 +37,50 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         notifyDataSetChanged();
     }
 
-    public void sortedList(List<RecyclerMovieListModel> moviesToAppend){
+    public void sortedList(List<RecyclerMovieListModel> moviesToAppend,String sortingType){
         movieList.addAll(moviesToAppend);
-        Collections.sort(movieList, new Comparator<RecyclerMovieListModel>(){
-            @Override
-            public int compare(RecyclerMovieListModel o1, RecyclerMovieListModel o2) {
-                return o1.getName().compareToIgnoreCase(o2.getName());
-            }
-        });
+        collectionsSorting(sortingType);
         notifyDataSetChanged();
+    }
+
+    public void collectionsSorting(String sortingType){
+        if(sortingType.equals("name")){
+            Collections.sort(movieList, new Comparator<RecyclerMovieListModel>(){
+                @Override
+                public int compare(RecyclerMovieListModel o1, RecyclerMovieListModel o2) {
+
+                    return o1.getName().compareToIgnoreCase(o2.getName());
+                }
+            });
+        }
+        else if(sortingType.equals("rating")){
+            Collections.sort(movieList, new Comparator<RecyclerMovieListModel>(){
+                @Override
+                public int compare(RecyclerMovieListModel o1, RecyclerMovieListModel o2) {
+
+                    return o2.getRating().compareToIgnoreCase(o1.getRating());
+                }
+            });
+        }
+        else if(sortingType.equals("date_asc")){
+            Collections.sort(movieList, new Comparator<RecyclerMovieListModel>(){
+                @Override
+                public int compare(RecyclerMovieListModel o1, RecyclerMovieListModel o2) {
+
+                    return o1.getDate().compareToIgnoreCase(o2.getDate());
+                }
+            });
+        }
+
+        else if(sortingType.equals("date_desc")){
+            Collections.sort(movieList, new Comparator<RecyclerMovieListModel>(){
+                @Override
+                public int compare(RecyclerMovieListModel o1, RecyclerMovieListModel o2) {
+
+                    return o2.getDate().compareToIgnoreCase(o1.getDate());
+                }
+            });
+        }
     }
 
     public class MovieListViewHolder extends RecyclerView.ViewHolder{
