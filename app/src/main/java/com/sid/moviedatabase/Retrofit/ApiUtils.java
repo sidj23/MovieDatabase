@@ -8,4 +8,10 @@ public class ApiUtils {
     public static RetrofitInterface getServiceClass(){
         return RetrofitApi.getRetrofit(BASE_URL).create(RetrofitInterface.class);
     }
+
+    public static RetrofitInterface getDiscoverClass(){
+        return RetrofitApi.getRetrofit(BASE_URL).create(RetrofitInterface.class);
+    }
+
+
 }

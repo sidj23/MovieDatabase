@@ -16,16 +16,16 @@ public interface RetrofitInterface {
 
 
     @GET("popular/")
-    Call<MostPopularModel> popularMovies(@Query("api_key")String key,@Query("page")String pages);
+    Call<MostPopularModel> popularMovies(@Query("api_key")String key,@Query("page")int pages);
 
     @GET("now_playing/")
-    Call<InTheatreModel> inTheatreMovies(@Query("api_key")String key,@Query("page")String pages);
+    Call<InTheatreModel> inTheatreMovies(@Query("api_key")String key,@Query("page")int pages);
 
     @GET("upcoming/")
-    Call<ComingSoonModel> comingSoon(@Query("api_key")String key,@Query("page")String pages);
+    Call<ComingSoonModel> comingSoon(@Query("api_key")String key,@Query("page")int pages);
 
     @GET("top_rated/")
-    Call<TopRatedModel> topRated(@Query("api_key")String key,@Query("page")String pages);
+    Call<TopRatedModel> topRated(@Query("api_key")String key,@Query("page")int pages);
 
     @GET("{movie_id}")
     Call<MovieDetailsModel> getDetails(@Path("movie_id")String id, @Query("api_key")String key);

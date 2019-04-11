@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.sid.moviedatabase.Adapter.MostPopularAdapter;
 import com.sid.moviedatabase.Adapter.MovieListAdapter;
@@ -22,6 +27,9 @@ import com.sid.moviedatabase.RetrofitModel.MostPopularModel;
 import com.sid.moviedatabase.RetrofitModel.TopRatedModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,7 +43,9 @@ public class MovieListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MovieListAdapter movieListAdapter;
     List<RecyclerMovieListModel> movieList;
-
+    ProgressBar progressBar;
+    private boolean isFetchingMovies;
+    private int currentPage = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,31 +54,47 @@ public class MovieListActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView=findViewById(R.id.recycler_movie_list);
+        progressBar=findViewById(R.id.progress_ml);
         Intent get = getIntent();
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(MovieListActivity.this, LinearLayout.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
         switch (get.getStringExtra("type")){
             case "mostPopular" :
-                mostPopular();
+                mostPopular(currentPage,"normal");
+                setupOnScrollListener("mostPopular","normal");
                 setTitle("Most Popular");
                 break;
             case "inTheatre":
-                inTheatre();
+                inTheatre(currentPage);
+                setupOnScrollListener("inTheatre","normal");
                 setTitle("In Theatre");
                 break;
             case "comingSoon":
-                comingSoon();
+                comingSoon(currentPage);
+                setupOnScrollListener("comingSoon","normal");
                 setTitle("Coming Soon");
                 break;
             case "topRated":
-                topRated();
+                topRated(currentPage);
+                setupOnScrollListener("topRated","normal");
                 setTitle("Top Rated");
                 break;
         }
 
+
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_movies, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -76,13 +102,50 @@ public class MovieListActivity extends AppCompatActivity {
             finish();
             return true;
         }
-        // other menu select events may be present here
+        else if(item.getItemId() == R.id.sort){
+            showSortMenu();
+            return true;
+        }
+        else{
+            return super.onOptionsItemSelected(item);
+        }
 
-        return super.onOptionsItemSelected(item);
     }
 
-    public void mostPopular(){
-        ApiUtils.getServiceClass().popularMovies(API_KEY,"1").enqueue(new Callback<MostPopularModel>() {
+    private void showSortMenu() {
+        PopupMenu sortMenu = new PopupMenu(this, findViewById(R.id.sort));
+
+        sortMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                /*
+                 * Every time we sort, we need to go back to page 1
+                 */
+                currentPage = 1;
+
+                switch (item.getItemId()) {
+                    case R.id.popular:
+                        setupOnScrollListener("mostPopular","menu");
+                        return true;
+                    case R.id.top_rated:
+
+                        return true;
+                    case R.id.upcoming:
+
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+
+        sortMenu.inflate(R.menu.menu_sort);
+        sortMenu.show();
+    }
+
+    public void mostPopular(final int page, final String type){
+        isFetchingMovies = true;
+        ApiUtils.getServiceClass().popularMovies(API_KEY,page).enqueue(new Callback<MostPopularModel>() {
             @Override
             public void onResponse(Call<MostPopularModel> call, Response<MostPopularModel> response) {
                 if(response.isSuccessful()){
@@ -94,10 +157,40 @@ public class MovieListActivity extends AppCompatActivity {
                                 response.body().getMovieResults().get(i).getCount(),
                                 response.body().getMovieResults().get(i).getDate(),
                                 response.body().getMovieResults().get(i).getImgUrl()));
+                        Log.d("mlresponse", "onResponse: "+response.body().getMovieResults().get(i).getMovieId());
                     }
-                    movieListAdapter = new MovieListAdapter(MovieListActivity.this,movieList);
-                    recyclerView.setAdapter(movieListAdapter);
-                    movieListAdapter.notifyDataSetChanged();
+
+                    if(type.equals("normal")){
+                        if (movieListAdapter == null) {
+                            movieListAdapter = new MovieListAdapter(MovieListActivity.this,movieList);
+                            recyclerView.setAdapter(movieListAdapter);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                        else
+                        {
+                            movieListAdapter.appendMovies(movieList);
+                        }
+                    }
+                    else if(type.equals("menu")){
+                        if (movieListAdapter == null) {
+                            movieListAdapter = new MovieListAdapter(MovieListActivity.this,movieList);
+                            recyclerView.setAdapter(movieListAdapter);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                        else
+                        {
+                            movieListAdapter.sortedList(movieList);
+                        }
+                    }
+
+
+                    currentPage = page;
+                    isFetchingMovies = false;
+
+                   // movieListAdapter.notifyDataSetChanged();
+
                 }
             }
 
@@ -108,8 +201,9 @@ public class MovieListActivity extends AppCompatActivity {
         });
     }
 
-    private void inTheatre() {
-        ApiUtils.getServiceClass().inTheatreMovies(API_KEY,"1").enqueue(new Callback<InTheatreModel>() {
+    private void inTheatre(final int page) {
+        isFetchingMovies = true;
+        ApiUtils.getServiceClass().inTheatreMovies(API_KEY,page).enqueue(new Callback<InTheatreModel>() {
             @Override
             public void onResponse(Call<InTheatreModel> call, Response<InTheatreModel> response) {
                 if (response.isSuccessful()){
@@ -122,9 +216,22 @@ public class MovieListActivity extends AppCompatActivity {
                                 response.body().getResults().get(i).getDate(),
                                 response.body().getResults().get(i).getImgUrl()));
                     }
-                    movieListAdapter = new MovieListAdapter(MovieListActivity.this,movieList);
-                    recyclerView.setAdapter(movieListAdapter);
-                    movieListAdapter.notifyDataSetChanged();
+
+
+                    if (movieListAdapter == null) {
+                        movieListAdapter = new MovieListAdapter(MovieListActivity.this,movieList);
+                        recyclerView.setAdapter(movieListAdapter);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    else
+                    {
+                        movieListAdapter.appendMovies(movieList);
+                    }
+                    currentPage = page;
+                    isFetchingMovies = false;
+
+                    // movieListAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -134,8 +241,9 @@ public class MovieListActivity extends AppCompatActivity {
             }
         });
     }
-    private void comingSoon() {
-        ApiUtils.getServiceClass().comingSoon(API_KEY,"1").enqueue(new Callback<ComingSoonModel>() {
+    private void comingSoon(final int page) {
+        isFetchingMovies = true;
+        ApiUtils.getServiceClass().comingSoon(API_KEY,page).enqueue(new Callback<ComingSoonModel>() {
             @Override
             public void onResponse(Call<ComingSoonModel> call, Response<ComingSoonModel> response) {
                 if (response.isSuccessful()){
@@ -148,9 +256,20 @@ public class MovieListActivity extends AppCompatActivity {
                                 response.body().getResults().get(i).getReleaseDate(),
                                 response.body().getResults().get(i).getImgUrl()));
                     }
-                    movieListAdapter = new MovieListAdapter(MovieListActivity.this,movieList);
-                    recyclerView.setAdapter(movieListAdapter);
-                    movieListAdapter.notifyDataSetChanged();
+                    if (movieListAdapter == null) {
+                        movieListAdapter = new MovieListAdapter(MovieListActivity.this,movieList);
+                        recyclerView.setAdapter(movieListAdapter);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    else
+                    {
+                        movieListAdapter.appendMovies(movieList);
+                    }
+                    currentPage = page;
+                    isFetchingMovies = false;
+
+                    // movieListAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -161,8 +280,9 @@ public class MovieListActivity extends AppCompatActivity {
         });
     }
 
-    private void topRated() {
-        ApiUtils.getServiceClass().topRated(API_KEY,"1").enqueue(new Callback<TopRatedModel>() {
+    private void topRated(final int page) {
+        isFetchingMovies = true;
+        ApiUtils.getServiceClass().topRated(API_KEY,page).enqueue(new Callback<TopRatedModel>() {
             @Override
             public void onResponse(Call<TopRatedModel> call, Response<TopRatedModel> response) {
                 if (response.isSuccessful()){
@@ -175,9 +295,21 @@ public class MovieListActivity extends AppCompatActivity {
                                 response.body().getResults().get(i).getDate(),
                                 response.body().getResults().get(i).getImgUrl()));
                     }
-                    movieListAdapter = new MovieListAdapter(MovieListActivity.this,movieList);
-                    recyclerView.setAdapter(movieListAdapter);
-                    movieListAdapter.notifyDataSetChanged();
+
+                    if (movieListAdapter == null) {
+                        movieListAdapter = new MovieListAdapter(MovieListActivity.this,movieList);
+                        recyclerView.setAdapter(movieListAdapter);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    else
+                    {
+                        movieListAdapter.appendMovies(movieList);
+                    }
+                    currentPage = page;
+                    isFetchingMovies = false;
+
+                    // movieListAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -187,5 +319,53 @@ public class MovieListActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setupOnScrollListener(final String type,final String sortType) {
+        final LinearLayoutManager manager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                int totalItemCount = manager.getItemCount();
+                int visibleItemCount = manager.getChildCount();
+                int firstVisibleItem = manager.findFirstVisibleItemPosition();
+
+                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
+                    if (!isFetchingMovies) {
+                        switch (type){
+                            case "mostPopular" :
+                                mostPopular(currentPage+1,sortType);
+                                setTitle("Most Popular");
+                                break;
+                            case "inTheatre":
+                                inTheatre(currentPage+1);
+                                setTitle("In Theatre");
+                                break;
+                            case "comingSoon":
+                                comingSoon(currentPage+1);
+                                setTitle("Coming Soon");
+                                break;
+                            case "topRated":
+                                topRated(currentPage+1);
+                                setTitle("Top Rated");
+                                break;
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public void sortList(){
+        Collections.sort(movieList, new Comparator<RecyclerMovieListModel>(){
+        @Override
+        public int compare(RecyclerMovieListModel o1, RecyclerMovieListModel o2) {
+            return o1.getName().compareToIgnoreCase(o2.getName());
+            }
+        });
+        movieListAdapter.sortedList(movieList);
+    }
+
+
 
 }

@@ -16,6 +16,8 @@ import com.sid.moviedatabase.R;
 import com.sid.moviedatabase.UI.MovieDetailsActivity;
 import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.sid.moviedatabase.Constants.IMG_URL;
@@ -28,6 +30,22 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     public MovieListAdapter(Context context, List<RecyclerMovieListModel> movieList) {
         this.context = context;
         this.movieList = movieList;
+    }
+
+    public void appendMovies(List<RecyclerMovieListModel> moviesToAppend) {
+        movieList.addAll(moviesToAppend);
+        notifyDataSetChanged();
+    }
+
+    public void sortedList(List<RecyclerMovieListModel> moviesToAppend){
+        movieList.addAll(moviesToAppend);
+        Collections.sort(movieList, new Comparator<RecyclerMovieListModel>(){
+            @Override
+            public int compare(RecyclerMovieListModel o1, RecyclerMovieListModel o2) {
+                return o1.getName().compareToIgnoreCase(o2.getName());
+            }
+        });
+        notifyDataSetChanged();
     }
 
     public class MovieListViewHolder extends RecyclerView.ViewHolder{
@@ -77,6 +95,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             }
         });
     }
+
+
 
     @Override
     public int getItemCount() {

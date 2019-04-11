@@ -50,13 +50,29 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_most_popular"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:padding="10dp"
-                app:reverseLayout="true"
-                app:stackFromEnd="true" />
+                android:layout_height="250dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_most_popular"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:padding="10dp"
+                    app:reverseLayout="true"
+                    app:stackFromEnd="true"
+                    android:visibility="gone"/>
+
+                <ProgressBar
+                    android:id="@+id/progress_mp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:layout_gravity="center" />
+
+            </FrameLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -93,13 +109,27 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_in_theatre"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:padding="10dp"
-                app:reverseLayout="true"
-                app:stackFromEnd="true" />
+                android:layout_height="300dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_in_theatre"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:padding="10dp"
+                    app:reverseLayout="true"
+                    app:stackFromEnd="true"
+                    android:visibility="gone"/>
+
+                <ProgressBar
+                    android:id="@+id/progress_it"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:layout_gravity="center" />
+
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -137,14 +167,27 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_coming_soon"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:padding="10dp"
-                app:reverseLayout="true"
-                app:stackFromEnd="true" />
+                android:layout_height="300dp">
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_coming_soon"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:padding="10dp"
+                    app:reverseLayout="true"
+                    app:stackFromEnd="true"
+                    android:visibility="gone"/>
+
+                <ProgressBar
+                    android:id="@+id/progress_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:layout_gravity="center" />
+
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -181,13 +224,27 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_top_rated"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:padding="10dp"
-                app:reverseLayout="true"
-                app:stackFromEnd="true" />
+                android:layout_height="300dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_top_rated"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:padding="10dp"
+                    app:reverseLayout="true"
+                    app:stackFromEnd="true"
+                    android:visibility="gone"/>
+
+                <ProgressBar
+                    android:id="@+id/progress_tr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:layout_gravity="center" />
+
+            </FrameLayout>
 
             </LinearLayout>
 

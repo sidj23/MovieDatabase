@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sid.moviedatabase.Adapter.ComingSoonAdapter;
@@ -32,6 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
 import static com.sid.moviedatabase.Constants.API_KEY;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView saPopular,saInTheater,saComSoon,saTopRated;
 
+    ProgressBar progBarMp,progBarIt,progBarCs,progBarTr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
         saComSoon=findViewById(R.id.tv_sa_coming_soon);
         saTopRated=findViewById(R.id.tv_sa_top_rated);
 
+        progBarMp=findViewById(R.id.progress_mp);
+        progBarIt=findViewById(R.id.progress_it);
+        progBarCs=findViewById(R.id.progress_cs);
+        progBarTr=findViewById(R.id.progress_tr);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false);
         recyclerMostPopular.setLayoutManager(layoutManager);
@@ -133,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void mostPopular(){
-        ApiUtils.getServiceClass().popularMovies(API_KEY,"1").enqueue(new Callback<MostPopularModel>() {
+        ApiUtils.getServiceClass().popularMovies(API_KEY,1).enqueue(new Callback<MostPopularModel>() {
             @Override
             public void onResponse(Call<MostPopularModel> call, Response<MostPopularModel> response) {
                 if(response.isSuccessful()){
@@ -147,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
                     mostPopularAdapter = new MostPopularAdapter(MainActivity.this,movieList);
                     recyclerMostPopular.setAdapter(mostPopularAdapter);
                     mostPopularAdapter.notifyDataSetChanged();
+                    progBarMp.setVisibility(GONE);
+                    recyclerMostPopular.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -159,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void inTheaters(){
 
-        ApiUtils.getServiceClass().inTheatreMovies(API_KEY,"1").enqueue(new Callback<InTheatreModel>() {
+        ApiUtils.getServiceClass().inTheatreMovies(API_KEY,1).enqueue(new Callback<InTheatreModel>() {
             @Override
             public void onResponse(Call<InTheatreModel> call, Response<InTheatreModel> response) {
                 if (response.isSuccessful()){
@@ -173,6 +183,9 @@ public class MainActivity extends AppCompatActivity {
                     inTheatreAdapter = new InTheatreAdapter(MainActivity.this,itMovieList);
                     recyclerInTheater.setAdapter(inTheatreAdapter);
                     inTheatreAdapter.notifyDataSetChanged();
+
+                    progBarIt.setVisibility(GONE);
+                    recyclerInTheater.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -186,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void comingSoon() {
 
-        ApiUtils.getServiceClass().comingSoon(API_KEY,"1").enqueue(new Callback<ComingSoonModel>() {
+        ApiUtils.getServiceClass().comingSoon(API_KEY,1).enqueue(new Callback<ComingSoonModel>() {
             @Override
             public void onResponse(Call<ComingSoonModel> call, Response<ComingSoonModel> response) {
 
@@ -202,6 +215,9 @@ public class MainActivity extends AppCompatActivity {
                     comingSoonAdapter = new ComingSoonAdapter(MainActivity.this,csMovieList);
                     recyclerComSoon.setAdapter(comingSoonAdapter);
                     comingSoonAdapter.notifyDataSetChanged();
+
+                    progBarCs.setVisibility(GONE);
+                    recyclerComSoon.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -216,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void topRated (){
 
-        ApiUtils.getServiceClass().topRated(API_KEY,"1").enqueue(new Callback<TopRatedModel>() {
+        ApiUtils.getServiceClass().topRated(API_KEY,1).enqueue(new Callback<TopRatedModel>() {
             @Override
             public void onResponse(Call<TopRatedModel> call, Response<TopRatedModel> response) {
                 if(response.isSuccessful()){
@@ -230,6 +246,9 @@ public class MainActivity extends AppCompatActivity {
                     topRatedAdapter = new TopRatedAdapter(MainActivity.this,trMovieList);
                     recyclerTopRate.setAdapter(topRatedAdapter);
                     topRatedAdapter.notifyDataSetChanged();
+
+                    progBarTr.setVisibility(GONE);
+                    recyclerTopRate.setVisibility(View.VISIBLE);
                 }
             }
 
