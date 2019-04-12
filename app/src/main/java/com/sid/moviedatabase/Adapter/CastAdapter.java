@@ -27,6 +27,8 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         this.castList = castList;
     }
 
+
+
     public class CastViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imgProf;
@@ -40,6 +42,8 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
             tvName=view.findViewById(R.id.tv_md_cast);
         }
     }
+
+
 
     @NonNull
     @Override
