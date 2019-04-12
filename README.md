@@ -25,6 +25,6 @@ So this is the small introduction of this Android Application.
 
 There more updates which are coming soon so stay tuned.
 If you want the apk, then please go to the "Build-APK" folder in the repository.
-Please let me know your views in the comments. It will be very helpfull for me.
+Please let me know your views in the comments. It will be very helpful for me.
 
 Thank you.
